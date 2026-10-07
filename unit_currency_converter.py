@@ -1,28 +1,18 @@
-def elite_converter():
-    print("=" * 50)
-    print(" 💱 RABIA'S ELITE UNIT & CURRENCY CONVERTER 💱")
-    print("=" * 50)
-    print("1. Kilometers to Miles")
-    print("2. Celsius to Fahrenheit")
-    print("3. USD to INR (Estimated Rate: 83.0)")
-    
-    choice = input("Select conversion option (1/2/3): ").strip()
-    
-    if choice == '1':
-        km = float(input("Enter kilometers: "))
-        miles = km * 0.621371
-        print(f"Result: {km} KM = {miles:.2f} Miles")
-    elif choice == '2':
-        c = float(input("Enter temperature in Celsius: "))
-        f = (c * 9/5) + 32
-        print(f"Result: {c}°C = {f:.2f}°F")
-    elif choice == '3':
-        usd = float(input("Enter amount in USD ($): "))
-        inr = usd * 83.0
-        print(f"Result: ${usd} USD = ₹{inr:.2f} INR")
-    else:
-        print("Invalid choice! Please select 1, 2, or 3.")
-    print("=" * 50)
+import streamlit as st
 
-if __name__ == "__main__":
-    elite_converter()
+st.title("💱 Rabia's Live Currency & Unit Converter")
+st.write("Convert international currencies and core physical metrics instantly.")
+
+conversion_type = st.selectbox("Select Conversion Utility", ["Currency (USD to INR)", "Length (Meters to Feet)", "Weight (Kg to Pounds)"])
+
+input_val = st.number_input("Enter value to convert:", value=1.0)
+
+if conversion_type == "Currency (USD to INR)":
+    result = input_val * 83.5
+    st.success(f"Converted Value: ₹ {result:.2f}")
+elif conversion_type == "Length (Meters to Feet)":
+    result = input_val * 3.28084
+    st.success(f"Converted Value: {result:.2f} Feet")
+else:
+    result = input_val * 2.20462
+    st.success(f"Converted Value: {result:.2f} lbs")
